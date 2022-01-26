@@ -1,4 +1,5 @@
 from sklearn import preprocessing
+from sklearn.linear_model import LinearRegression
 import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
@@ -73,4 +74,19 @@ plt.xlabel('Minutes')
 plt.ylabel('Frequency')
 plt.show()
 
+# standardization of employee - productivity
+salary_productivity = employees[['Salary', 'Productivity']].copy()
+standardizer = preprocessing.StandardScaler()
+scaled_salary = standardizer.fit_transform(salary_productivity)
 
+# scaler = preprocessing.MinMaxScaler()
+# scaled_salary = scaler.fit_transform(salary_productivity)
+
+# Does not seem to be a relationship between Productivity and Salary
+plt.clf()
+plt.plot(scaled_salary, 'bo')
+plt.xlabel('Salary')
+plt.ylabel('Productivity')
+plt.title('Standardized Income-Productivity')
+
+plt.show()
