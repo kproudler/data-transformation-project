@@ -44,3 +44,33 @@ plt.title('Expenses')
 plt.axis('Equal')
 plt.tight_layout()
 plt.show()
+
+# Salaries make up the majority of expenses (62%) - might requires a cut
+
+employees = pd.read_csv('employees.csv')
+# print(employees.head())
+
+sorted_productivity = employees.sort_values(['Productivity'])
+# print(sorted_productivity)
+
+# Salary expense effect of cutting the least 100 productive employees
+employees_cut = sorted_productivity[0:100]
+print(employees_cut.Salary.sum())
+
+# commute times - skew of 1.1484
+commute_times = employees['Commute Time']
+# print(commute_times.skew())
+
+# commute log - skew of -0.4241
+commute_times_log = np.log(commute_times)
+# print(commute_times.describe())
+# print(commute_times_log.skew())
+
+plt.clf()
+plt.hist(commute_times_log)
+plt.title('Commute Times')
+plt.xlabel('Minutes')
+plt.ylabel('Frequency')
+plt.show()
+
+
